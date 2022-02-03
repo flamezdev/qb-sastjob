@@ -91,54 +91,54 @@ Configured for Matus SAHP Station
 # qb-core/shared/jobs.lua 
 ```
 ['statetrooper'] = {
-		label = 'State Trooper',
-		defaultDuty = true,
-		offDutyPay = false,
-		grades = {
-            ['0'] = {
-                name = 'Trainee',
-                payment = 50
-            },
-	    ['1'] = {
-                name = 'Trooper',
-                payment = 75
-            },
-            ['2'] = {
-                name = 'Senior Trooper',
-                payment = 100
-            },
-            ['3'] = {
-                name = 'Master Trooper',
-                payment = 125
-            },
-            ['4'] = {
-                name = 'Sergeant',
-                payment = 150
-            },
-	    ['5'] = {
-                name = 'Lieutenant',
-                payment = 175
-            },
-            ['6'] = {
-                name = 'Captain',
-                payment = 200
-            },
-            ['7'] = {
-                name = 'Major',
-                payment = 225
-            },
-            ['8'] = {
-                name = 'Lt. Colonel',
-		isboss = true,
-                payment = 250
-            },
-            ['9'] = {
-                name = 'Colonel',
-		isboss = true,
-                payment = 300
-            },
+    label = 'State Trooper',
+    defaultDuty = true,
+    offDutyPay = false,
+    grades = {
+        ['0'] = {
+            name = 'Trainee',
+            payment = 50
         },
-	},
+        ['1'] = {
+            name = 'Trooper',
+            payment = 100
+        },
+        ['2'] = {
+            name = 'Senior Trooper',
+            payment = 125
+        },
+        ['3'] = {
+            name = 'Master Trooper',
+            payment = 150
+        },
+        ['4'] = {
+            name = 'Sergeant',
+            payment = 175
+        },
+        ['5'] = {
+            name = 'Lieutenant',
+            payment = 200
+        },
+        ['6'] = {
+            name = 'Captain',
+            payment = 225
+        },
+        ['7'] = {
+            name = 'Major',
+            payment = 250
+        },
+        ['8'] = {
+            name = 'Lt. Colonel',
+            isboss = true,
+            payment = 300
+        },
+        ['9'] = {
+            name = 'Colonel',
+            isboss = true,
+            payment = 350
+        },
+    },
+},
 ```
 # qb-bossmenu/config.lua
 ```
