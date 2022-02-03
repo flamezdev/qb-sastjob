@@ -1,18 +1,12 @@
-# qb-sheriffjob
- Sheriff job for QBCore 
+# qb-statetrooper
+ State Trooper job for QBCore 
  <p>
  <b>
-I edited policejob for sheriffs and i am planning to add more locales support.
+I edited DvScriptsSK/qb-sheriffjob for state troopers.
 </b>
 </p>
 <p>
-Configured for GABZ paleto sheriff
-</p>
-<p>
-Locales in progress:
-SK
-CZ
-DE
+Configured for Matus SAHP Station
 </p>
 
 # License
@@ -96,69 +90,57 @@ DE
 
 # qb-core/shared/jobs.lua 
 ```
-['sheriff'] = {
-		label = 'Sheriff',
+['statetrooper'] = {
+		label = 'State Trooper',
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
             ['0'] = {
-                name = 'Recruit',
+                name = 'Trainee',
                 payment = 50
             },
-			['1'] = {
-                name = 'Deputy I',
+	    ['1'] = {
+                name = 'Trooper',
                 payment = 75
             },
             ['2'] = {
-                name = 'Deputy II',
-                payment = 75
-            },
-            ['3'] = {
-                name = 'Deputy III',
-                payment = 75
-            },
-            ['4'] = {
-                name = 'Investigator',
-                payment = 75
-            },
-			['5'] = {
-                name = 'master investigator',
+                name = 'Senior Trooper',
                 payment = 100
             },
-			['6'] = {
-                name = 'Sergant',
+            ['3'] = {
+                name = 'Master Trooper',
                 payment = 125
             },
-			['7'] = {
-                name = 'lieuitenant',
+            ['4'] = {
+                name = 'Sergeant',
                 payment = 150
+            },
+	    ['5'] = {
+                name = 'Lieutenant',
+                payment = 175
+            },
+            ['6'] = {
+                name = 'Captain',
+                payment = 200
+            },
+            ['7'] = {
+                name = 'Major',
+                payment = 225
             },
             ['8'] = {
-                name = 'captain',
-                payment = 150
+                name = 'Lt. Colonel',
+		isboss = true,
+                payment = 250
             },
             ['9'] = {
-                name = 'chief deputy',
-                payment = 150
-            },
-            ['10'] = {
-                name = 'assistant sheriff',
-                payment = 150
-            },
-            ['11'] = {
-                name = 'undersheriff',
-				isboss = true,
-                payment = 150
-            },
-            ['12'] = {
-                name = 'Sheriff',
-				isboss = true,
-                payment = 150
+                name = 'Colonel',
+		isboss = true,
+                payment = 300
             },
         },
 	},
 ```
 # qb-bossmenu/config.lua
 ```
-    ['sheriff'] = vector3(-433.28, 6006.27, 37.0),
+    ['statetrooper'] = vector3(-433.28, 6006.27, 37.0),
 ```
