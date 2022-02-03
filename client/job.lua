@@ -144,7 +144,7 @@ function TakeOutVehicle(vehicleInfo)
     if coords then
         QBCore.Functions.SpawnVehicle(vehicleInfo, function(veh)
             SetCarItemsInfo()
-            SetVehicleNumberPlateText(veh, Lang:t('info.statetrooper_plate')..tostring(math.random(1000, 9999)))
+            SetVehicleNumberPlateText(veh, Lang:t('info.police_plate')..tostring(math.random(1000, 9999)))
             SetEntityHeading(veh, coords.w)
             exports['LegacyFuel']:SetFuel(veh, 100.0)
             closeMenuFull()
@@ -443,7 +443,7 @@ end)
 
 -- Threads
 -- Toggle Duty in an event.
-RegisterNetEvent('qb-statetrooper:ToggleDuty', function()
+RegisterNetEvent('qb-statetrooperjob:ToggleDuty', function()
     onDuty = not onDuty
     TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
     TriggerServerEvent("statetrooper:server:UpdateBlips")
@@ -451,7 +451,7 @@ RegisterNetEvent('qb-statetrooper:ToggleDuty', function()
 end)
 
 -- Toggle Duty in an event.
-RegisterNetEvent('qb-statetrooper:ToggleDuty', function()
+RegisterNetEvent('qb-statetrooperjob:ToggleDuty', function()
     onDuty = not onDuty
     TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
     TriggerServerEvent("statetrooper:server:UpdateBlips")
@@ -545,8 +545,8 @@ CreateThread(function()
                         if #(pos - v) < 1.5 then
                             DrawText3D(v.x, v.y, v.z, Lang:t('info.stash_enter'))
                             if IsControlJustReleased(0, 38) then
-                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "statetrooperstash_"..QBCore.Functions.GetPlayerData().citizenid)
-                                TriggerEvent("inventory:client:SetCurrentStash", "statetrooperstash_"..QBCore.Functions.GetPlayerData().citizenid)
+                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "policestash_"..QBCore.Functions.GetPlayerData().citizenid)
+                                TriggerEvent("inventory:client:SetCurrentStash", "policestash_"..QBCore.Functions.GetPlayerData().citizenid)
                             end
                         elseif #(pos - v) < 2.5 then
                             DrawText3D(v.x, v.y, v.z, Lang:t('info.stash'))
@@ -559,7 +559,7 @@ CreateThread(function()
     end
 end)
 
--- statetrooper Trash
+-- Police Trash
 CreateThread(function()
     Wait(1000)
     while true do
@@ -572,11 +572,11 @@ CreateThread(function()
                     if #(pos - v) < 1.0 then
                         DrawText3D(v.x, v.y, v.z, Lang:t('info.trash_enter'))
                         if IsControlJustReleased(0, 38) then
-                            TriggerServerEvent("inventory:server:OpenInventory", "stash", "statetroopertrash", {
+                            TriggerServerEvent("inventory:server:OpenInventory", "stash", "policetrash", {
                                 maxweight = 4000000,
                                 slots = 300,
                             })
-                            TriggerEvent("inventory:client:SetCurrentStash", "statetroopertrash")
+                            TriggerEvent("inventory:client:SetCurrentStash", "policetrash")
                         end
                     elseif #(pos - v) < 1.5 then
                         DrawText3D(v.x, v.y, v.z, Lang:t('info.trash'))
@@ -687,7 +687,7 @@ CreateThread(function()
                                     QBCore.Functions.DeleteVehicle(GetVehiclePedIsIn(PlayerPedId()))
                                 else
                                     local coords = Config.Locations["helicopter"][k]
-                                    QBCore.Functions.SpawnVehicle(Config.statetrooperHelicopter, function(veh)
+                                    QBCore.Functions.SpawnVehicle(Config.PoliceHelicopter, function(veh)
                                         SetVehicleLivery(veh , 0)
                                         SetVehicleMod(veh, 0, 48)
                                         SetVehicleNumberPlateText(veh, "ZULU"..tostring(math.random(1000, 9999)))
@@ -709,7 +709,7 @@ CreateThread(function()
     end
 end)
 
--- statetrooper Impound
+-- Police Impound
 CreateThread(function()
     Wait(1000)
     local headerDrawn = false
@@ -761,7 +761,7 @@ CreateThread(function()
     end
 end)
 
--- statetrooper Vehicle Garage
+-- Police Vehicle Garage
 CreateThread(function()
     Wait(1000)
     local headerDrawn = false

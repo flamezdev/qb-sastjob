@@ -155,7 +155,7 @@ RegisterNetEvent('statetrooper:client:UpdateBlips', function(players)
     end
 end)
 
-RegisterNetEvent('statetrooper:client:statetrooperAlert', function(coords, text)
+RegisterNetEvent('statetrooper:client:policeAlert', function(coords, text)
     local street1, street2 = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
     local street1name = GetStreetNameFromHashKey(street1)
     local street2name = GetStreetNameFromHashKey(street2)
@@ -200,12 +200,6 @@ RegisterNetEvent('statetrooper:client:SendToJail', function(time)
     ClearPedTasks(PlayerPedId())
     DetachEntity(PlayerPedId(), true, false)
     TriggerEvent("prison:client:Enter", time)
-end)
-
-RegisterNetEvent('statetrooper:client:SendstatetrooperEmergencyAlert', function()
-    local Player = QBCore.Functions.GetPlayerData()
-    TriggerServerEvent('statetrooper:server:statetrooperAlert', Lang:t('info.officer_down', {lastname = Player.charinfo.lastname, callsign = Player.metadata.callsign}))
-    TriggerServerEvent('hospital:server:ambulanceAlert', Lang:t('info.officer_down', {lastname = Player.charinfo.lastname, callsign = Player.metadata.callsign}))
 end)
 
 -- Threads

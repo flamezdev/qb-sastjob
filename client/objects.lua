@@ -5,7 +5,7 @@ local spikemodel = `P_ld_stinger_s`
 local ClosestSpike = nil
 
 -- Functions
-local function GetCloseststatetrooperObject()
+local function GetClosestPoliceObject()
     local pos = GetEntityCoords(PlayerPedId(), true)
     local current = nil
     local dist = nil
@@ -154,7 +154,7 @@ RegisterNetEvent('statetrooper:client:spawnLight', function()
 end)
 
 RegisterNetEvent('statetrooper:client:deleteObject', function()
-    local objectId, dist = GetCloseststatetrooperObject()
+    local objectId, dist = GetClosestPoliceObject()
     if dist < 5.0 then
         QBCore.Functions.Progressbar("remove_object", Lang:t('progressbar.remove_object'), 2500, false, true, {
             disableMovement = true,

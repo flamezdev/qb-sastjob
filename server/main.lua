@@ -184,7 +184,7 @@ QBCore.Commands.Add("pobject", Lang:t("commands.place_object"), {{name = "type",
             TriggerClientEvent("statetrooper:client:deleteObject", src)
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -194,7 +194,7 @@ QBCore.Commands.Add("cuff", Lang:t("commands.cuff_player"), {}, false, function(
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:CuffPlayer", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -215,7 +215,7 @@ QBCore.Commands.Add("clearcasings", Lang:t("commands.clear_casign"), {}, false, 
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("evidence:client:ClearCasingsInArea", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -231,7 +231,7 @@ QBCore.Commands.Add("jail", Lang:t("commands.jail_player"), {{name = "id", help 
             TriggerClientEvent('QBCore:Notify', src, Lang:t('info.jail_time_no'), 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -242,7 +242,7 @@ QBCore.Commands.Add("unjail", Lang:t("commands.unjail_player"), {{name = "id", h
         local playerId = tonumber(args[1])
         TriggerClientEvent("prison:client:UnjailPerson", playerId)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -252,7 +252,7 @@ QBCore.Commands.Add("clearblood", Lang:t("commands.clearblood"), {}, false, func
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("evidence:client:ClearBlooddropsInArea", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -262,7 +262,7 @@ QBCore.Commands.Add("seizecash", Lang:t("commands.seizecash"), {}, false, functi
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:SeizeCash", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -272,7 +272,7 @@ QBCore.Commands.Add("sc", Lang:t("commands.softcuff"), {}, false, function(sourc
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:CuffPlayerSoft", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -282,7 +282,7 @@ QBCore.Commands.Add("cam", Lang:t("commands.camera"), {{name = "camid", help = L
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:ActiveCamera", src, tonumber(args[1]))
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -300,7 +300,7 @@ QBCore.Commands.Add("flagplate", Lang:t("commands.flagplate"), {{name = "plate",
         }
         TriggerClientEvent('QBCore:Notify', src, Lang:t("info.vehicle_flagged", {vehicle = args[1]:upper(), reason = table.concat(reason, " ")}))
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -319,7 +319,7 @@ QBCore.Commands.Add("unflagplate", Lang:t("commands.unflagplate"), {{name = "pla
             TriggerClientEvent('QBCore:Notify', src, Lang:t("error.vehicle_not_flag"), 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -337,7 +337,7 @@ QBCore.Commands.Add("plateinfo", Lang:t("commands.plateinfo"), {{name = "plate",
             TriggerClientEvent('QBCore:Notify', src, Lang:t("error.vehicle_not_flag"), 'error')
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -347,7 +347,7 @@ QBCore.Commands.Add("depot", Lang:t("commands.depot"), {{name = "price", help = 
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:ImpoundVehicle", src, false, tonumber(args[1]))
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -357,7 +357,7 @@ QBCore.Commands.Add("impound", Lang:t("commands.impound"), {}, false, function(s
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:ImpoundVehicle", src, true)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -377,7 +377,7 @@ QBCore.Commands.Add("paytow", Lang:t("commands.paytow"), {{name = "id", help = L
             end
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -389,7 +389,7 @@ QBCore.Commands.Add("paylawyer", Lang:t("commands.paylawyer"), {{name = "id",hel
         local OtherPlayer = QBCore.Functions.GetPlayer(playerId)
         if OtherPlayer then
             if OtherPlayer.PlayerData.job.name == "lawyer" then
-                OtherPlayer.Functions.AddMoney("bank", 500, "statetrooper-lawyer-paid")
+                OtherPlayer.Functions.AddMoney("bank", 500, "police-lawyer-paid")
                 TriggerClientEvent('QBCore:Notify', OtherPlayer.PlayerData.source, Lang:t("success.tow_paid"), 'success')
                 TriggerClientEvent('QBCore:Notify', src, Lang:t("info.paid_lawyer"))
             else
@@ -397,7 +397,7 @@ QBCore.Commands.Add("paylawyer", Lang:t("commands.paylawyer"), {{name = "id",hel
             end
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -407,7 +407,7 @@ QBCore.Commands.Add("anklet", Lang:t("commands.anklet"), {}, false, function(sou
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:CheckDistance", src)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -427,7 +427,7 @@ QBCore.Commands.Add("ankletlocation", Lang:t("commands.ankletlocation"), {{name 
             end
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -447,7 +447,7 @@ QBCore.Commands.Add("removeanklet", Lang:t("commands.removeanklet"), {{name = "c
             end
         end
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -457,7 +457,7 @@ QBCore.Commands.Add("takedrivinglicense", Lang:t("commands.drivinglicense"), {},
     if Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty then
         TriggerClientEvent("statetrooper:client:SeizeDriverLicense", source)
     else
-        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_statetrooper_only"), 'error')
+        TriggerClientEvent('QBCore:Notify', src, Lang:t("error.on_duty_police_only"), 'error')
     end
 end)
 
@@ -494,10 +494,10 @@ RegisterNetEvent('statetrooper:server:SendTrackerLocation', function(coords, req
         description = msg
     }
     TriggerClientEvent("statetrooper:client:TrackerMessage", requestId, msg, coords)
-    TriggerClientEvent("qb-phone:client:addstatetrooperAlert", requestId, alertData)
+    TriggerClientEvent("qb-phone:client:addPoliceAlert", requestId, alertData)
 end)
 
-QBCore.Commands.Add('911p', Lang:t("commands.statetrooper_report"), {{name='message', help=Lang:t("commands.message_sent")}}, false, function(source, args)
+QBCore.Commands.Add('911p', Lang:t("commands.police_report"), {{name='message', help=Lang:t("commands.message_sent")}}, false, function(source, args)
 	local src = source
 	if args[1] then message = table.concat(args, " ") else message = Lang:t("commands.civilian_call") end
     local ped = GetPlayerPed(src)
@@ -506,8 +506,8 @@ QBCore.Commands.Add('911p', Lang:t("commands.statetrooper_report"), {{name='mess
     for k,v in pairs(players) do
         if v.PlayerData.job.name == 'statetrooper' and v.PlayerData.job.onduty then
             local alertData = {title = Lang:t("commands.emergency_call"), coords = {coords.x, coords.y, coords.z}, description = message}
-            TriggerClientEvent("qb-phone:client:addstatetrooperAlert", v.PlayerData.source, alertData)
-            TriggerClientEvent('statetrooper:client:statetrooperAlert', v.PlayerData.source, coords, message)
+            TriggerClientEvent("qb-phone:client:addPoliceAlert", v.PlayerData.source, alertData)
+            TriggerClientEvent('statetrooper:client:policeAlert', v.PlayerData.source, coords, message)
         end
     end
 end)
@@ -619,7 +619,7 @@ QBCore.Functions.CreateCallback('statetrooper:GetCops', function(source, cb)
     cb(amount)
 end)
 
-QBCore.Functions.CreateCallback('statetrooper:server:IsstatetrooperForcePresent', function(source, cb)
+QBCore.Functions.CreateCallback('statetrooper:server:IsPoliceForcePresent', function(source, cb)
     local retval = false
     local players = QBCore.Functions.GetQBPlayers()
     for k, v in pairs(players) do
@@ -635,12 +635,12 @@ end)
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then
         CreateThread(function()
-            MySQL.Async.execute("DELETE FROM stashitems WHERE stash='statetroopertrash'")
+            MySQL.Async.execute("DELETE FROM stashitems WHERE stash='policetrash'")
         end)
     end
 end)
 
-RegisterNetEvent('statetrooper:server:statetrooperAlert', function(text)
+RegisterNetEvent('statetrooper:server:policeAlert', function(text)
     local src = source
     local ped = GetPlayerPed(src)
     local coords = GetEntityCoords(ped)
@@ -648,8 +648,8 @@ RegisterNetEvent('statetrooper:server:statetrooperAlert', function(text)
     for k,v in pairs(players) do
         if v.PlayerData.job.name == 'statetrooper' and v.PlayerData.job.onduty then
             local alertData = {title = Lang:t('info.new_call'), coords = {coords.x, coords.y, coords.z}, description = text}
-            TriggerClientEvent("qb-phone:client:addstatetrooperAlert", v.PlayerData.source, alertData)
-            TriggerClientEvent('statetrooper:client:statetrooperAlert', v.PlayerData.source, coords, text)
+            TriggerClientEvent("qb-phone:client:addPoliceAlert", v.PlayerData.source, alertData)
+            TriggerClientEvent('statetrooper:client:policeAlert', v.PlayerData.source, coords, text)
         end
     end
 end)
@@ -772,20 +772,20 @@ RegisterNetEvent('heli:spotlight', function(state)
     TriggerClientEvent('heli:spotlight', -1, serverID, state)
 end)
 
--- RegisterNetEvent('statetrooper:server:FlaggedPlateTriggered', function(camId, plate, street1, street2, blipSettings)
+-- RegisterNetEvent('police:server:FlaggedPlateTriggered', function(camId, plate, street1, street2, blipSettings)
 --     local src = source
 --     for k, v in pairs(QBCore.Functions.GetPlayers()) do
 --         local Player = QBCore.Functions.GetPlayer(v)
 --         if Player then
---             if (Player.PlayerData.job.name == "statetrooper" and Player.PlayerData.job.onduty) then
+--             if (Player.PlayerData.job.name == "police" and Player.PlayerData.job.onduty) then
 --                 if street2 then
---                     TriggerClientEvent("112:client:SendstatetrooperAlert", v, "flagged", {
+--                     TriggerClientEvent("112:client:SendPoliceAlert", v, "flagged", {
 --                         camId = camId,
 --                         plate = plate,
 --                         streetLabel = street1 .. " " .. street2
 --                     }, blipSettings)
 --                 else
---                     TriggerClientEvent("112:client:SendstatetrooperAlert", v, "flagged", {
+--                     TriggerClientEvent("112:client:SendPoliceAlert", v, "flagged", {
 --                         camId = camId,
 --                         plate = plate,
 --                         streetLabel = street1
@@ -990,7 +990,7 @@ RegisterNetEvent('evidence:server:AddCasingToInventory', function(casingId, casi
     end
 end)
 
-RegisterNetEvent('statetrooper:server:showFingerprint', function(playerId)
+RegisterNetEvent('postatetrooperlice:server:showFingerprint', function(playerId)
     local src = source
     TriggerClientEvent('statetrooper:client:showFingerprint', playerId, src)
     TriggerClientEvent('statetrooper:client:showFingerprint', src, playerId)

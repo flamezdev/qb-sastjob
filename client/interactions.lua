@@ -400,7 +400,7 @@ RegisterNetEvent('statetrooper:client:GetCuffed', function(playerId, isSoftcuff)
         isEscorted = false
         TriggerEvent('hospital:client:isEscorted', isEscorted)
         DetachEntity(ped, true, false)
-        TriggerServerEvent("statetrooper:server:SetHandcuffStatus", false)
+        TriggerServerEvent("polstatetrooperice:server:SetHandcuffStatus", false)
         ClearPedTasksImmediately(ped)
         TriggerServerEvent("InteractSound_SV:PlayOnSource", "Uncuff", 0.2)
         QBCore.Functions.Notify(Lang:t("success.uncuffed"),"success")

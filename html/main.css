@@ -5,8 +5,8 @@
 	user-select: none;
 }
 
-/* statetrooper Radar */
-#statetrooperradar {
+/* Police Radar */
+#policeradar {
 	width: 495px;
 	height: 202px;
 
@@ -26,7 +26,7 @@
 	align-items: center;
 }
 
-#statetrooperradar .antennalabel {
+#policeradar .antennalabel {
 	font-family: 'Poppins', sans-serif;
 	font-size: 14px;
 	font-weight: bold;
@@ -35,19 +35,19 @@
 	position: absolute;
 }
 
-#statetrooperradar .antennalabeltop {
+#policeradar .antennalabeltop {
 	top: 0;
 	left: 0;
 	padding-top: 5px;
 }
 
-#statetrooperradar .antennalabelbottom {
+#policeradar .antennalabelbottom {
 	bottom: 0;
 	left: 0;
 	padding-bottom: 5px;
 }
 
-#statetrooperradar .logo {
+#policeradar .logo {
 	font-family: 'Poppins', sans-serif;
 	font-size: 17px;
 	font-weight: bold;
@@ -56,7 +56,7 @@
 	position: absolute;
 }
 
-#statetrooperradar .main {
+#policeradar .main {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -65,7 +65,7 @@
 	height: 100%;
 }
 
-#statetrooperradar .patrolcontainer {
+#policeradar .patrolcontainer {
 	background-color: black;
 	display: flex;
 	flex-direction: column;
@@ -73,7 +73,7 @@
 	justify-content: flex-start;
 }
 
-#statetrooperradar .typecontainer {
+#policeradar .typecontainer {
 	background-color: black;
 	display: flex;
 	flex-direction: column;
@@ -82,7 +82,7 @@
 	width: 0;
 }
 
-#statetrooperradar .typecontainer .text {
+#policeradar .typecontainer .text {
 	font-family: 'Poppins', sans-serif;
 	font-size: 10px;
 	line-height: 27px;
@@ -90,11 +90,11 @@
 	color: black;
 }
 
-#statetrooperradar .typecontainer .active {
+#policeradar .typecontainer .active {
 	color: white;
 }
 
-#statetrooperradar .container {
+#policeradar .container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -102,45 +102,45 @@
 	justify-content: space-around;
 }
 
-#statetrooperradar .arrowbox {
+#policeradar .arrowbox {
 	justify-content: center;
 	align-items: center;
 }
 
-#statetrooperradar .arrowbox i {
+#policeradar .arrowbox i {
 	font-size: 20px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	color: black;
 }
 
-#statetrooperradar .arrowbox .active {
+#policeradar .arrowbox .active {
 	color: white;
 }
 
-#statetrooperradar .arrowbox .inactive {
+#policeradar .arrowbox .inactive {
 	color: black;
 }
 
-#statetrooperradar .container .label {
+#policeradar .container .label {
 	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	text-align: center;
 }
 
-#statetrooperradar .container .speedsourcecontainer {
+#policeradar .container .speedsourcecontainer {
 	width: 135px;
 	height: 58px;
 	display: flex;
 	justify-content: space-around;
 }
 
-#statetrooperradar .container .speedsourcecontainer .speednumber {
+#policeradar .container .speedsourcecontainer .speednumber {
 	width: 100%;
 }
 
-#statetrooperradar .container .speedsourcecontainer .text {
+#policeradar .container .speedsourcecontainer .text {
 	font-family: 'Poppins', sans-serif;
 	font-size: 58px;
 	line-height: 58px;
@@ -148,21 +148,21 @@
 	text-align: center;
 }
 
-#statetrooperradar .container .target {
+#policeradar .container .target {
 	background: rgb(200, 0, 0);
 	background: linear-gradient(to bottom, rgb(220, 0, 40), rgb(90, 0, 0));
 }
 
-#statetrooperradar .container .patrol {
+#policeradar .container .patrol {
 	background: rgb(0, 125, 0);
 	background: linear-gradient(to bottom, rgb(0, 150, 0), rgb(0, 75, 0));
 }
 
-#statetrooperradar .container .locked {
+#policeradar .container .locked {
 	color: rgb(50, 0, 0);
 }
 
-#statetrooperradar .container .speedfastcontainer {
+#policeradar .container .speedfastcontainer {
 	width: 99px;
 	height: 50px;
 	display: flex;
@@ -170,11 +170,11 @@
 	justify-content: space-around;
 }
 
-#statetrooperradar .container .speedfastcontainer .speednumber {
+#policeradar .container .speedfastcontainer .speednumber {
 	width: 100%;
 }
 
-#statetrooperradar .container .speedfastcontainer .text {
+#policeradar .container .speedfastcontainer .text {
 	font-family: 'Poppins', sans-serif;
 	font-size: 50px;
 	line-height: 50px;
@@ -182,8 +182,8 @@
 	text-align: center;
 }
 
-/* statetrooper Radar - Remote Control */
-#statetrooperradarrc {
+/* Police Radar - Remote Control */
+#policeradarrc {
 	width: 290px;
 	height: 350px;
 
@@ -205,22 +205,22 @@
 	align-items: center;
 }
 
-#statetrooperradarrc .breakline {
+#policeradarrc .breakline {
 	width: 230px;
 	height: 10px;
 	background-color: white;
 }
 
-#statetrooperradarrc .label {
+#policeradarrc .label {
 	font-family: 'Poppins', sans-serif;
 }
 
-#statetrooperradarrc .container {
+#policeradarrc .container {
 	font-family: 'Poppins', sans-serif;
 	align-items: center;
 }
 
-#statetrooperradarrc .container button {
+#policeradarrc .container button {
 	display: inline-block;
 	cursor: pointer;
 	text-decoration: none;
@@ -228,15 +228,15 @@
 	border: none;
 }
 
-#statetrooperradarrc .container button:hover {
+#policeradarrc .container button:hover {
 	background-color: #6cd3f9;
 }
 
-#statetrooperradarrc .container button:active {
+#policeradarrc .container button:active {
 	background-color: #56a8c7;
 }
 
-#statetrooperradarrc .container .toggle {
+#policeradarrc .container .toggle {
 	padding: 5px 15px;
 	font-size: 16px;
 	text-align: center;
@@ -246,7 +246,7 @@
 	margin-bottom: 15px;
 }
 
-#statetrooperradarrc .container .limit {
+#policeradarrc .container .limit {
 	padding: 5px 15px;
 	font-size: 16px;
 	text-align: center;
@@ -256,29 +256,29 @@
 	margin-top: 15px;
 }
 
-#statetrooperradarrc .container .close {
+#policeradarrc .container .close {
 	padding: 3px 7px;
 	font-size: 12px;
 }
 
-#statetrooperradarrc .container .rowbutton {
+#policeradarrc .container .rowbutton {
 	width: 60px;
 	height: 60px;
 }
 
-#statetrooperradarrc .container .frontopp {
+#policeradarrc .container .frontopp {
 	border-top-left-radius: 50%;
 }
 
-#statetrooperradarrc .container .frontsame {
+#policeradarrc .container .frontsame {
 	border-top-right-radius: 50%;
 }
 
-#statetrooperradarrc .container .rearopp {
+#policeradarrc .container .rearopp {
 	border-bottom-left-radius: 50%;
 }
 
-#statetrooperradarrc .container .rearsame {
+#policeradarrc .container .rearsame {
 	border-bottom-right-radius: 50%;
 }
 
