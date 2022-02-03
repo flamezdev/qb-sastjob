@@ -1,4 +1,4 @@
-# qb-policejob
+# qb-statetrooper
 Police Job for QB-Core Framework :police_officer:
 
 # License
@@ -99,7 +99,7 @@ Police Job for QB-Core Framework :police_officer:
 - Add the following code to your server.cfg/resouces.cfg
 ```
 ensure qb-core
-ensure qb-policejob
+ensure qb-statetrooper
 ```
 
 ## Configuration

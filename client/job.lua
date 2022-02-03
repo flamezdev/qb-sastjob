@@ -129,7 +129,7 @@ function TakeOutImpound(vehicle)
                 SetEntityHeading(veh, coords.w)
                 exports['LegacyFuel']:SetFuel(veh, vehicle.fuel)
                 doCarDamage(veh, vehicle)
-                TriggerServerEvent('police:server:TakeOutImpound',vehicle.plate)
+                TriggerServerEvent('statetrooper:server:TakeOutImpound',vehicle.plate)
                 closeMenuFull()
                 TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1)
                 TriggerEvent("vehiclekeys:client:SetOwner", QBCore.Functions.GetPlate(veh))
@@ -144,7 +144,7 @@ function TakeOutVehicle(vehicleInfo)
     if coords then
         QBCore.Functions.SpawnVehicle(vehicleInfo, function(veh)
             SetCarItemsInfo()
-            SetVehicleNumberPlateText(veh, Lang:t('info.police_plate')..tostring(math.random(1000, 9999)))
+            SetVehicleNumberPlateText(veh, Lang:t('info.statetrooper_plate')..tostring(math.random(1000, 9999)))
             SetEntityHeading(veh, coords.w)
             exports['LegacyFuel']:SetFuel(veh, 100.0)
             closeMenuFull()
@@ -162,7 +162,7 @@ end
 local function IsArmoryWhitelist() -- being removed
     local retval = false
 
-    if QBCore.Functions.GetPlayerData().job.name == 'police' then
+    if QBCore.Functions.GetPlayerData().job.name == 'statetrooper' then
         retval = true
     end
     return retval
@@ -190,7 +190,7 @@ function MenuGarage(currentSelection)
             header = label,
             txt = "",
             params = {
-                event = "police:client:TakeOutVehicle",
+                event = "statetrooper:client:TakeOutVehicle",
                 args = {
                     vehicle = veh,
                     currentSelection = currentSelection
@@ -205,7 +205,7 @@ function MenuGarage(currentSelection)
                 header = label,
                 txt = "",
                 params = {
-                    event = "police:client:TakeOutVehicle",
+                    event = "statetrooper:client:TakeOutVehicle",
                     args = {
                         vehicle = veh,
                         currentSelection = currentSelection
@@ -233,7 +233,7 @@ function MenuImpound(currentSelection)
             isMenuHeader = true
         }
     }
-    QBCore.Functions.TriggerCallback("police:GetImpoundedVehicles", function(result)
+    QBCore.Functions.TriggerCallback("statetrooper:GetImpoundedVehicles", function(result)
         local shouldContinue = false
         if result == nil then
             QBCore.Functions.Notify(Lang:t("error.no_impound"), "error", 5000)
@@ -249,7 +249,7 @@ function MenuImpound(currentSelection)
                     header = vname.." ["..v.plate.."]",
                     txt =  Lang:t('info.vehicle_info', {value = enginePercent, value2 = currentFuel}),
                     params = {
-                        event = "police:client:TakeOutImpound",
+                        event = "statetrooper:client:TakeOutImpound",
                         args = {
                             vehicle = v,
                             currentSelection = currentSelection
@@ -285,12 +285,12 @@ RegisterNUICallback('closeFingerprint', function()
 end)
 
 --Events
-RegisterNetEvent('police:client:showFingerprint', function(playerId)
+RegisterNetEvent('statetrooper:client:showFingerprint', function(playerId)
     openFingerprintUI()
     FingerPrintSessionId = playerId
 end)
 
-RegisterNetEvent('police:client:showFingerprintId', function(fid)
+RegisterNetEvent('statetrooper:client:showFingerprintId', function(fid)
     SendNUIMessage({
         type = "updateFingerprintId",
         fingerprintId = fid
@@ -299,19 +299,19 @@ RegisterNetEvent('police:client:showFingerprintId', function(fid)
 end)
 
 RegisterNUICallback('doFingerScan', function(data)
-    TriggerServerEvent('police:server:showFingerprintId', FingerPrintSessionId)
+    TriggerServerEvent('statetrooper:server:showFingerprintId', FingerPrintSessionId)
 end)
 
-RegisterNetEvent('police:client:SendEmergencyMessage', function(coords, message)
-    TriggerServerEvent("police:server:SendEmergencyMessage", coords, message)
-    TriggerEvent("police:client:CallAnim")
+RegisterNetEvent('statetrooper:client:SendEmergencyMessage', function(coords, message)
+    TriggerServerEvent("statetrooper:server:SendEmergencyMessage", coords, message)
+    TriggerEvent("statetrooper:client:CallAnim")
 end)
 
-RegisterNetEvent('police:client:EmergencySound', function()
+RegisterNetEvent('statetrooper:client:EmergencySound', function()
     PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
 end)
 
-RegisterNetEvent('police:client:CallAnim', function()
+RegisterNetEvent('statetrooper:client:CallAnim', function()
     local isCalling = true
     local callCount = 5
     loadAnimDict("cellphone@")
@@ -329,7 +329,7 @@ RegisterNetEvent('police:client:CallAnim', function()
     end)
 end)
 
-RegisterNetEvent('police:client:ImpoundVehicle', function(fullImpound, price)
+RegisterNetEvent('statetrooper:client:ImpoundVehicle', function(fullImpound, price)
     local vehicle = QBCore.Functions.GetClosestVehicle()
     local bodyDamage = math.ceil(GetVehicleBodyHealth(vehicle))
     local engineDamage = math.ceil(GetVehicleEngineHealth(vehicle))
@@ -340,19 +340,19 @@ RegisterNetEvent('police:client:ImpoundVehicle', function(fullImpound, price)
         local vehpos = GetEntityCoords(vehicle)
         if #(pos - vehpos) < 5.0 and not IsPedInAnyVehicle(ped) then
             local plate = QBCore.Functions.GetPlate(vehicle)
-            TriggerServerEvent("police:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)
+            TriggerServerEvent("statetrooper:server:Impound", plate, fullImpound, price, bodyDamage, engineDamage, totalFuel)
             QBCore.Functions.DeleteVehicle(vehicle)
         end
     end
 end)
 
-RegisterNetEvent('police:client:CheckStatus', function()
+RegisterNetEvent('statetrooper:client:CheckStatus', function()
     QBCore.Functions.GetPlayerData(function(PlayerData)
-        if PlayerData.job.name == "police" then
+        if PlayerData.job.name == "statetrooper" then
             local player, distance = GetClosestPlayer()
             if player ~= -1 and distance < 5.0 then
                 local playerId = GetPlayerServerId(player)
-                QBCore.Functions.TriggerCallback('police:GetPlayerStatus', function(result)
+                QBCore.Functions.TriggerCallback('statetrooper:GetPlayerStatus', function(result)
                     if result then
                         for k, v in pairs(result) do
                             QBCore.Functions.Notify(''..v..'')
@@ -366,7 +366,7 @@ RegisterNetEvent('police:client:CheckStatus', function()
     end)
 end)
 
-RegisterNetEvent("police:client:VehicleMenuHeader", function (data)
+RegisterNetEvent("statetrooper:client:VehicleMenuHeader", function (data)
     local ped = PlayerPedId()
     local pos = GetEntityCoords(ped)
     local takeDist = Config.Locations['vehicle'][data.currentSelection]
@@ -378,7 +378,7 @@ RegisterNetEvent("police:client:VehicleMenuHeader", function (data)
 end)
 
 
-RegisterNetEvent("police:client:ImpoundMenuHeader", function (data)
+RegisterNetEvent("statetrooper:client:ImpoundMenuHeader", function (data)
     local pos = GetEntityCoords(PlayerPedId())
     local takeDist = Config.Locations['impound'][data.currentSelection]
     takeDist = vector3(takeDist.x, takeDist.y,  takeDist.z)
@@ -388,7 +388,7 @@ RegisterNetEvent("police:client:ImpoundMenuHeader", function (data)
     end
 end)
 
-RegisterNetEvent('police:client:TakeOutImpound', function(data)
+RegisterNetEvent('statetrooper:client:TakeOutImpound', function(data)
     local pos = GetEntityCoords(PlayerPedId())
     local takeDist = Config.Locations['impound'][data.currentSelection]
     takeDist = vector3(takeDist.x, takeDist.y,  takeDist.z)
@@ -398,7 +398,7 @@ RegisterNetEvent('police:client:TakeOutImpound', function(data)
     end
 end)
 
-RegisterNetEvent('police:client:TakeOutVehicle', function(data)
+RegisterNetEvent('statetrooper:client:TakeOutVehicle', function(data)
     local pos = GetEntityCoords(PlayerPedId())
     local takeDist = Config.Locations['vehicle'][data.currentSelection]
     takeDist = vector3(takeDist.x, takeDist.y,  takeDist.z)
@@ -408,7 +408,7 @@ RegisterNetEvent('police:client:TakeOutVehicle', function(data)
     end
 end)
 
-RegisterNetEvent('police:client:EvidenceStashDrawer', function(data)
+RegisterNetEvent('statetrooper:client:EvidenceStashDrawer', function(data)
     local currentEvidence = data.currentEvidence
     local pos = GetEntityCoords(PlayerPedId())
     local takeLoc = Config.Locations["evidence"][currentEvidence]
@@ -443,18 +443,18 @@ end)
 
 -- Threads
 -- Toggle Duty in an event.
-RegisterNetEvent('qb-policejob:ToggleDuty', function()
+RegisterNetEvent('qb-statetrooper:ToggleDuty', function()
     onDuty = not onDuty
-    TriggerServerEvent("police:server:UpdateCurrentCops")
-    TriggerServerEvent("police:server:UpdateBlips")
+    TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
+    TriggerServerEvent("statetrooper:server:UpdateBlips")
     TriggerServerEvent("QBCore:ToggleDuty")
 end)
 
 -- Toggle Duty in an event.
-RegisterNetEvent('qb-policejob:ToggleDuty', function()
+RegisterNetEvent('qb-statetrooper:ToggleDuty', function()
     onDuty = not onDuty
-    TriggerServerEvent("police:server:UpdateCurrentCops")
-    TriggerServerEvent("police:server:UpdateBlips")
+    TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
+    TriggerServerEvent("statetrooper:server:UpdateBlips")
     TriggerServerEvent("QBCore:ToggleDuty")
 end)
 
@@ -462,7 +462,7 @@ end)
 CreateThread(function()
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
 
             for k, v in pairs(Config.Locations["duty"]) do
@@ -476,9 +476,9 @@ CreateThread(function()
                         end
                         if IsControlJustReleased(0, 38) then
                             onDuty = not onDuty
-                            TriggerServerEvent("police:server:UpdateCurrentCops")
+                            TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
                             TriggerServerEvent("QBCore:ToggleDuty")
-                            TriggerServerEvent("police:server:UpdateBlips")
+                            TriggerServerEvent("statetrooper:server:UpdateBlips")
                         end
                     elseif #(pos - v) < 2.5 then
                         DrawText3D(v.x, v.y, v.z, Lang:t('info.onoff_duty'))
@@ -497,7 +497,7 @@ CreateThread(function()
 
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["evidence"]) do
                 if #(pos - v) < 2 then
@@ -509,7 +509,7 @@ CreateThread(function()
                                 {
                                     header = Lang:t('info.evidence_stash', {value = k}),
                                     params = {
-                                        event = 'police:client:EvidenceStashDrawer',
+                                        event = 'statetrooper:client:EvidenceStashDrawer',
                                         args = {
                                             currentEvidence = k
                                         }
@@ -536,7 +536,7 @@ CreateThread(function()
     Wait(1000)
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["stash"]) do
                 if #(pos - v) < 4.5 then
@@ -545,8 +545,8 @@ CreateThread(function()
                         if #(pos - v) < 1.5 then
                             DrawText3D(v.x, v.y, v.z, Lang:t('info.stash_enter'))
                             if IsControlJustReleased(0, 38) then
-                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "policestash_"..QBCore.Functions.GetPlayerData().citizenid)
-                                TriggerEvent("inventory:client:SetCurrentStash", "policestash_"..QBCore.Functions.GetPlayerData().citizenid)
+                                TriggerServerEvent("inventory:server:OpenInventory", "stash", "statetrooperstash_"..QBCore.Functions.GetPlayerData().citizenid)
+                                TriggerEvent("inventory:client:SetCurrentStash", "statetrooperstash_"..QBCore.Functions.GetPlayerData().citizenid)
                             end
                         elseif #(pos - v) < 2.5 then
                             DrawText3D(v.x, v.y, v.z, Lang:t('info.stash'))
@@ -559,12 +559,12 @@ CreateThread(function()
     end
 end)
 
--- Police Trash
+-- statetrooper Trash
 CreateThread(function()
     Wait(1000)
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["trash"]) do
                 if #(pos - v) < 2 then
@@ -572,11 +572,11 @@ CreateThread(function()
                     if #(pos - v) < 1.0 then
                         DrawText3D(v.x, v.y, v.z, Lang:t('info.trash_enter'))
                         if IsControlJustReleased(0, 38) then
-                            TriggerServerEvent("inventory:server:OpenInventory", "stash", "policetrash", {
+                            TriggerServerEvent("inventory:server:OpenInventory", "stash", "statetroopertrash", {
                                 maxweight = 4000000,
                                 slots = 300,
                             })
-                            TriggerEvent("inventory:client:SetCurrentStash", "policetrash")
+                            TriggerEvent("inventory:client:SetCurrentStash", "statetroopertrash")
                         end
                     elseif #(pos - v) < 1.5 then
                         DrawText3D(v.x, v.y, v.z, Lang:t('info.trash'))
@@ -593,7 +593,7 @@ CreateThread(function()
     Wait(1000)
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["fingerprint"]) do
                 if #(pos - v) < 4.5 then
@@ -605,7 +605,7 @@ CreateThread(function()
                                 local player, distance = GetClosestPlayer()
                                 if player ~= -1 and distance < 2.5 then
                                     local playerId = GetPlayerServerId(player)
-                                    TriggerServerEvent("police:server:showFingerprint", playerId)
+                                    TriggerServerEvent("statetrooper:server:showFingerprint", playerId)
                                 else
                                     QBCore.Functions.Notify(Lang:t("error.none_nearby"), "error")
                                 end
@@ -626,7 +626,7 @@ CreateThread(function()
     Wait(1000)
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["armory"]) do
                 if #(pos - v) < 4.5 then
@@ -651,7 +651,7 @@ CreateThread(function()
                                     end
                                 end
                                 SetWeaponSeries()
-                                TriggerServerEvent("inventory:server:OpenInventory", "shop", "police", authorizedItems)
+                                TriggerServerEvent("inventory:server:OpenInventory", "shop", "statetrooper", authorizedItems)
                             end
                         elseif #(pos - v) < 2.5 then
                             DrawText3D(v.x, v.y, v.z, Lang:t('info.armory'))
@@ -669,7 +669,7 @@ CreateThread(function()
     Wait(1000)
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["helicopter"]) do
                 if #(pos - vector3(v.x, v.y, v.z)) < 7.5 then
@@ -687,7 +687,7 @@ CreateThread(function()
                                     QBCore.Functions.DeleteVehicle(GetVehiclePedIsIn(PlayerPedId()))
                                 else
                                     local coords = Config.Locations["helicopter"][k]
-                                    QBCore.Functions.SpawnVehicle(Config.PoliceHelicopter, function(veh)
+                                    QBCore.Functions.SpawnVehicle(Config.statetrooperHelicopter, function(veh)
                                         SetVehicleLivery(veh , 0)
                                         SetVehicleMod(veh, 0, 48)
                                         SetVehicleNumberPlateText(veh, "ZULU"..tostring(math.random(1000, 9999)))
@@ -709,14 +709,14 @@ CreateThread(function()
     end
 end)
 
--- Police Impound
+-- statetrooper Impound
 CreateThread(function()
     Wait(1000)
     local headerDrawn = false
 
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["impound"]) do
                 if #(pos - vector3(v.x, v.y, v.z)) < 7.5 then
@@ -733,7 +733,7 @@ CreateThread(function()
                                         {
                                             header = Lang:t('menu.pol_impound'),
                                             params = {
-                                                event = 'police:client:ImpoundMenuHeader',
+                                                event = 'statetrooper:client:ImpoundMenuHeader',
                                                 args = {
                                                     currentSelection = k,
                                                 }
@@ -761,13 +761,13 @@ CreateThread(function()
     end
 end)
 
--- Police Vehicle Garage
+-- statetrooper Vehicle Garage
 CreateThread(function()
     Wait(1000)
     local headerDrawn = false
     while true do
         local sleep = 2000
-        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "police" then
+        if LocalPlayer.state.isLoggedIn and PlayerJob.name == "statetrooper" then
             local pos = GetEntityCoords(PlayerPedId())
             for k, v in pairs(Config.Locations["vehicle"]) do
                 if #(pos - vector3(v.x, v.y, v.z)) < 7.5 then
@@ -784,7 +784,7 @@ CreateThread(function()
                                         {
                                             header = Lang:t('menu.pol_garage'),
                                             params = {
-                                                event = 'police:client:VehicleMenuHeader',
+                                                event = 'statetrooper:client:VehicleMenuHeader',
                                                 args = {
                                                     currentSelection = k,
                                                 }

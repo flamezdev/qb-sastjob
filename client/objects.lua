@@ -5,7 +5,7 @@ local spikemodel = `P_ld_stinger_s`
 local ClosestSpike = nil
 
 -- Functions
-local function GetClosestPoliceObject()
+local function GetCloseststatetrooperObject()
     local pos = GetEntityCoords(PlayerPedId(), true)
     local current = nil
     local dist = nil
@@ -58,7 +58,7 @@ local function DrawText3D(x, y, z, text)
 end
 
 -- Events
-RegisterNetEvent('police:client:spawnCone', function()
+RegisterNetEvent('statetrooper:client:spawnCone', function()
     QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -70,14 +70,14 @@ RegisterNetEvent('police:client:spawnCone', function()
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("police:server:spawnObject", "cone")
+        TriggerServerEvent("statetrooper:server:spawnObject", "cone")
     end, function() -- Cancel
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
 
-RegisterNetEvent('police:client:spawnBarrier', function()
+RegisterNetEvent('statetrooper:client:spawnBarrier', function()
     QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -89,14 +89,14 @@ RegisterNetEvent('police:client:spawnBarrier', function()
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("police:server:spawnObject", "barrier")
+        TriggerServerEvent("statetrooper:server:spawnObject", "barrier")
     end, function() -- Cancel
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
 
-RegisterNetEvent('police:client:spawnRoadSign', function()
+RegisterNetEvent('statetrooper:client:spawnRoadSign', function()
     QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -108,14 +108,14 @@ RegisterNetEvent('police:client:spawnRoadSign', function()
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("police:server:spawnObject", "roadsign")
+        TriggerServerEvent("statetrooper:server:spawnObject", "roadsign")
     end, function() -- Cancel
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
 
-RegisterNetEvent('police:client:spawnTent', function()
+RegisterNetEvent('statetrooper:client:spawnTent', function()
     QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -127,14 +127,14 @@ RegisterNetEvent('police:client:spawnTent', function()
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("police:server:spawnObject", "tent")
+        TriggerServerEvent("statetrooper:server:spawnObject", "tent")
     end, function() -- Cancel
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
 
-RegisterNetEvent('police:client:spawnLight', function()
+RegisterNetEvent('statetrooper:client:spawnLight', function()
     QBCore.Functions.Progressbar("spawn_object", Lang:t("progressbar.place_object"), 2500, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -146,15 +146,15 @@ RegisterNetEvent('police:client:spawnLight', function()
         flags = 16,
     }, {}, {}, function() -- Done
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
-        TriggerServerEvent("police:server:spawnObject", "light")
+        TriggerServerEvent("statetrooper:server:spawnObject", "light")
     end, function() -- Cancel
         StopAnimTask(PlayerPedId(), "anim@narcotics@trash", "drop_front", 1.0)
         QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
     end)
 end)
 
-RegisterNetEvent('police:client:deleteObject', function()
-    local objectId, dist = GetClosestPoliceObject()
+RegisterNetEvent('statetrooper:client:deleteObject', function()
+    local objectId, dist = GetCloseststatetrooperObject()
     if dist < 5.0 then
         QBCore.Functions.Progressbar("remove_object", Lang:t('progressbar.remove_object'), 2500, false, true, {
             disableMovement = true,
@@ -167,7 +167,7 @@ RegisterNetEvent('police:client:deleteObject', function()
             flags = 16,
         }, {}, {}, function() -- Done
             StopAnimTask(PlayerPedId(), "weapons@first_person@aim_rng@generic@projectile@thermal_charge@", "plant_floor", 1.0)
-            TriggerServerEvent("police:server:deleteObject", objectId)
+            TriggerServerEvent("statetrooper:server:deleteObject", objectId)
         end, function() -- Cancel
             StopAnimTask(PlayerPedId(), "weapons@first_person@aim_rng@generic@projectile@thermal_charge@", "plant_floor", 1.0)
             QBCore.Functions.Notify(Lang:t("error.canceled"), "error")
@@ -175,13 +175,13 @@ RegisterNetEvent('police:client:deleteObject', function()
     end
 end)
 
-RegisterNetEvent('police:client:removeObject', function(objectId)
+RegisterNetEvent('statetrooper:client:removeObject', function(objectId)
     NetworkRequestControlOfEntity(ObjectList[objectId].object)
     DeleteObject(ObjectList[objectId].object)
     ObjectList[objectId] = nil
 end)
 
-RegisterNetEvent('police:client:spawnObject', function(objectId, type, player)
+RegisterNetEvent('statetrooper:client:spawnObject', function(objectId, type, player)
     local coords = GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(player)))
     local heading = GetEntityHeading(GetPlayerPed(GetPlayerFromServerId(player)))
     local forward = GetEntityForwardVector(PlayerPedId())
@@ -197,9 +197,9 @@ RegisterNetEvent('police:client:spawnObject', function(objectId, type, player)
     }
 end)
 
-RegisterNetEvent('police:client:SpawnSpikeStrip', function()
+RegisterNetEvent('statetrooper:client:SpawnSpikeStrip', function()
     if #SpawnedSpikes + 1 < Config.MaxSpikes then
-        if PlayerJob.name == "police" and PlayerJob.onduty then
+        if PlayerJob.name == "statetrooper" and PlayerJob.onduty then
             local spawnCoords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 2.0, 0.0)
             local spike = CreateObject(spikemodel, spawnCoords.x, spawnCoords.y, spawnCoords.z, 1, 1, 1)
             local netid = NetworkGetNetworkIdFromEntity(spike)
@@ -212,14 +212,14 @@ RegisterNetEvent('police:client:SpawnSpikeStrip', function()
                 netid = netid,
                 object = spike,
             }
-            TriggerServerEvent('police:server:SyncSpikes', SpawnedSpikes)
+            TriggerServerEvent('statetrooper:server:SyncSpikes', SpawnedSpikes)
         end
     else
         QBCore.Functions.Notify(Lang:t("error.no_spikestripe"), 'error')
     end
 end)
 
-RegisterNetEvent('police:client:SyncSpikes', function(table)
+RegisterNetEvent('statetrooper:client:SyncSpikes', function(table)
     SpawnedSpikes = table
 end)
 
@@ -276,7 +276,7 @@ CreateThread(function()
                 local dist = #(pos - SpawnedSpikes[ClosestSpike].coords)
                 if dist < 4 then
                     if not IsPedInAnyVehicle(PlayerPedId()) then
-                        if PlayerJob.name == "police" and PlayerJob.onduty then
+                        if PlayerJob.name == "statetrooper" and PlayerJob.onduty then
                             sleep = 0
                             DrawText3D(pos.x, pos.y, pos.z, Lang:t('info.delete_spike'))
                             if IsControlJustPressed(0, 38) then
@@ -286,7 +286,7 @@ CreateThread(function()
                                 DeleteEntity(SpawnedSpikes[ClosestSpike].object)
                                 SpawnedSpikes[ClosestSpike] = nil
                                 ClosestSpike = nil
-                                TriggerServerEvent('police:server:SyncSpikes', SpawnedSpikes)
+                                TriggerServerEvent('statetrooper:server:SyncSpikes', SpawnedSpikes)
                             end
                         end
                     end

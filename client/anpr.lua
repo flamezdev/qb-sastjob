@@ -17,7 +17,7 @@ function HandlespeedCam(speedCam, hasBeenBusted)
 			if GetPedInVehicleSeat(vehicle, -1) == myPed then
 				if GetVehicleClass(vehicle) ~= 18 then
                     local plate = QBCore.Functions.GetPlate(vehicle)
-					QBCore.Functions.TriggerCallback('police:IsPlateFlagged', function(result)
+					QBCore.Functions.TriggerCallback('statetrooper:IsPlateFlagged', function(result)
 						if result then
 							local coords = GetEntityCoords(PlayerPedId())
 							local blipsettings = {
@@ -32,7 +32,7 @@ function HandlespeedCam(speedCam, hasBeenBusted)
 							local s1, s2 = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
 							local street1 = GetStreetNameFromHashKey(s1)
 							local street2 = GetStreetNameFromHashKey(s2)
-							TriggerServerEvent("police:server:FlaggedPlateTriggered", hasBeenBusted, plate, street1, street2, blipsettings)
+							TriggerServerEvent("statetrooper:server:FlaggedPlateTriggered", hasBeenBusted, plate, street1, street2, blipsettings)
 						end
                     end, plate)
 				end

@@ -25,7 +25,7 @@ local locked_on_vehicle = nil
 local function IsPlayerInPolmav()
 	local lPed = PlayerPedId()
 	local vehicle = GetVehiclePedIsIn(lPed)
-	return IsVehicleModel(vehicle, GetHashKey(Config.PoliceHelicopter))
+	return IsVehicleModel(vehicle, GetHashKey(Config.StateTrooperHelicopter))
 end
 
 local function IsHeliHighEnough(heli)
@@ -137,7 +137,7 @@ CreateThread(function()
 	while true do
 		Wait(0)
 		if LocalPlayer.state.isLoggedIn then
-			if PlayerJob.name == 'police' and onDuty then
+			if PlayerJob.name == 'statetrooper' and onDuty then
 				if IsPlayerInPolmav() then
 					local lPed = PlayerPedId()
 					local heli = GetVehiclePedIsIn(lPed)

@@ -81,7 +81,7 @@ local function CreateInstuctionScaleform(scaleform)
 end
 
 -- Events
-RegisterNetEvent('police:client:ActiveCamera', function(cameraId)
+RegisterNetEvent('statetrooper:client:ActiveCamera', function(cameraId)
     if Config.SecurityCameras.cameras[cameraId] then
         DoScreenFadeOut(250)
         while not IsScreenFadedOut() do
@@ -117,19 +117,19 @@ RegisterNetEvent('police:client:ActiveCamera', function(cameraId)
     end
 end)
 
-RegisterNetEvent('police:client:DisableAllCameras', function()
+RegisterNetEvent('statetrooper:client:DisableAllCameras', function()
     for k, v in pairs(Config.SecurityCameras.cameras) do 
         Config.SecurityCameras.cameras[k].isOnline = false
     end
 end)
 
-RegisterNetEvent('police:client:EnableAllCameras', function()
+RegisterNetEvent('statetrooper:client:EnableAllCameras', function()
     for k, v in pairs(Config.SecurityCameras.cameras) do 
         Config.SecurityCameras.cameras[k].isOnline = true
     end
 end)
 
-RegisterNetEvent('police:client:SetCamera', function(key, isOnline)
+RegisterNetEvent('statetrooper:client:SetCamera', function(key, isOnline)
     Config.SecurityCameras.cameras[key].isOnline = isOnline
 end)
 

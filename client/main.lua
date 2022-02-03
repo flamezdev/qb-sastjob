@@ -22,7 +22,7 @@ local function CreateDutyBlips(playerId, playerLabel, playerJob, playerLocation)
         ShowHeadingIndicatorOnBlip(blip, true)
         SetBlipRotation(blip, math.ceil(playerLocation.w))
         SetBlipScale(blip, 1.0)
-        if playerJob == "police" then
+        if playerJob == "statetrooper" then
             SetBlipColour(blip, 38)
         else
             SetBlipColour(blip, 5)
@@ -47,9 +47,9 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     onDuty = player.job.onduty
     isHandcuffed = false
     TriggerServerEvent("QBCore:Server:SetMetaData", "ishandcuffed", false)
-    TriggerServerEvent("police:server:SetHandcuffStatus", false)
-    TriggerServerEvent("police:server:UpdateBlips")
-    TriggerServerEvent("police:server:UpdateCurrentCops")
+    TriggerServerEvent("statetrooper:server:SetHandcuffStatus", false)
+    TriggerServerEvent("statetrooper:server:UpdateBlips")
+    TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
 
     if player.metadata.tracker then
         local trackerClothingData = {
@@ -73,7 +73,7 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
         TriggerEvent('qb-clothing:client:loadOutfit', trackerClothingData)
     end
 
-    if PlayerJob and PlayerJob.name ~= "police" then
+    if PlayerJob and PlayerJob.name ~= "statetrooper" then
         if DutyBlips then
             for k, v in pairs(DutyBlips) do
                 RemoveBlip(v)
@@ -84,9 +84,9 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
 end)
 
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    TriggerServerEvent('police:server:UpdateBlips')
-    TriggerServerEvent("police:server:SetHandcuffStatus", false)
-    TriggerServerEvent("police:server:UpdateCurrentCops")
+    TriggerServerEvent('statetrooper:server:UpdateBlips')
+    TriggerServerEvent("statetrooper:server:SetHandcuffStatus", false)
+    TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
     isHandcuffed = false
     isEscorted = false
     onDuty = false
@@ -102,15 +102,15 @@ end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
     PlayerJob = JobInfo
-    TriggerServerEvent("police:server:UpdateBlips")
-    if JobInfo.name == "police" then
+    TriggerServerEvent("statetrooper:server:UpdateBlips")
+    if JobInfo.name == "statetrooper" then
         if PlayerJob.onduty then
             TriggerServerEvent("QBCore:ToggleDuty")
             onDuty = false
         end
     end
 
-    if (PlayerJob ~= nil) and PlayerJob.name ~= "police" then
+    if (PlayerJob ~= nil) and PlayerJob.name ~= "statetrooper" then
         if DutyBlips then
             for k, v in pairs(DutyBlips) do
                 RemoveBlip(v)
@@ -120,7 +120,7 @@ RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
     end
 end)
 
-RegisterNetEvent('police:client:sendBillingMail', function(amount)
+RegisterNetEvent('statetrooper:client:sendBillingMail', function(amount)
     SetTimeout(math.random(2500, 4000), function()
         local gender = Lang:t('info.mr')
         if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then
@@ -136,8 +136,8 @@ RegisterNetEvent('police:client:sendBillingMail', function(amount)
     end)
 end)
 
-RegisterNetEvent('police:client:UpdateBlips', function(players)
-    if PlayerJob and (PlayerJob.name == 'police' or PlayerJob.name == 'ambulance') and
+RegisterNetEvent('statetrooper:client:UpdateBlips', function(players)
+    if PlayerJob and (PlayerJob.name == 'statetrooper' or PlayerJob.name == 'ambulance') and
         onDuty then
         if DutyBlips then
             for k, v in pairs(DutyBlips) do
@@ -155,11 +155,11 @@ RegisterNetEvent('police:client:UpdateBlips', function(players)
     end
 end)
 
-RegisterNetEvent('police:client:policeAlert', function(coords, text)
+RegisterNetEvent('statetrooper:client:statetrooperAlert', function(coords, text)
     local street1, street2 = GetStreetNameAtCoord(coords.x, coords.y, coords.z)
     local street1name = GetStreetNameFromHashKey(street1)
     local street2name = GetStreetNameFromHashKey(street2)
-    QBCore.Functions.Notify({text = text, caption = street1name.. ' ' ..street2name}, 'police')
+    QBCore.Functions.Notify({text = text, caption = street1name.. ' ' ..street2name}, 'statetrooper')
     PlaySound(-1, "Lose_1st", "GTAO_FM_Events_Soundset", 0, 0, 1)
     local transG = 250
     local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
@@ -193,8 +193,8 @@ RegisterNetEvent('police:client:policeAlert', function(coords, text)
     end
 end)
 
-RegisterNetEvent('police:client:SendToJail', function(time)
-    TriggerServerEvent("police:server:SetHandcuffStatus", false)
+RegisterNetEvent('statetrooper:client:SendToJail', function(time)
+    TriggerServerEvent("statetrooper:server:SetHandcuffStatus", false)
     isHandcuffed = false
     isEscorted = false
     ClearPedTasks(PlayerPedId())
@@ -202,9 +202,9 @@ RegisterNetEvent('police:client:SendToJail', function(time)
     TriggerEvent("prison:client:Enter", time)
 end)
 
-RegisterNetEvent('police:client:SendPoliceEmergencyAlert', function()
+RegisterNetEvent('statetrooper:client:SendstatetrooperEmergencyAlert', function()
     local Player = QBCore.Functions.GetPlayerData()
-    TriggerServerEvent('police:server:policeAlert', Lang:t('info.officer_down', {lastname = Player.charinfo.lastname, callsign = Player.metadata.callsign}))
+    TriggerServerEvent('statetrooper:server:statetrooperAlert', Lang:t('info.officer_down', {lastname = Player.charinfo.lastname, callsign = Player.metadata.callsign}))
     TriggerServerEvent('hospital:server:ambulanceAlert', Lang:t('info.officer_down', {lastname = Player.charinfo.lastname, callsign = Player.metadata.callsign}))
 end)
 
