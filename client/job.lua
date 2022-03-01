@@ -450,13 +450,13 @@ RegisterNetEvent('qb-statetrooperjob:ToggleDuty', function()
     TriggerServerEvent("QBCore:ToggleDuty")
 end)
 
--- Toggle Duty in an event.
-RegisterNetEvent('qb-statetrooperjob:ToggleDuty', function()
-    onDuty = not onDuty
-    TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
-    TriggerServerEvent("statetrooper:server:UpdateBlips")
-    TriggerServerEvent("QBCore:ToggleDuty")
-end)
+-- -- Toggle Duty in an event.
+-- RegisterNetEvent('qb-statetrooperjob:ToggleDuty', function()
+--     onDuty = not onDuty
+--     TriggerServerEvent("statetrooper:server:UpdateCurrentCops")
+--     TriggerServerEvent("statetrooper:server:UpdateBlips")
+--     TriggerServerEvent("QBCore:ToggleDuty")
+-- end)
 
 -- Toggle Duty
 CreateThread(function()
